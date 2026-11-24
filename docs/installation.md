@@ -15,23 +15,22 @@ Select the clients that should discover it. The tool can install for more than o
 Clone the public repository.
 
 ```sh
-git clone https://github.com/janbam/crux-curiosity-skill.git crux-curiosity
+git clone https://github.com/janbam/crux-curiosity-skill.git
 ```
 
 For a reproducible install, add `--branch <published-tag> --single-branch` to the clone command and use that checkout below.
 
-The installable directory is named `crux-curiosity`. Use the source checkout path in the examples and run from the **target research workspace**, where the host should find the skill. Choose one location per host to avoid duplicate discovery. Install into a new destination. For upgrades, review the new bundle and replace the previously installed copy deliberately.
+The installable directory is `skills/crux-curiosity/` inside the checkout. Copy that folder only; the rest of the repository is documentation and evaluation material. Tags up to `v0.2.0` keep the skill at the checkout root. Use the source checkout path in the examples and run from the **target research workspace**, where the host should find the skill. Choose one location per host to avoid duplicate discovery. Install into a new destination. For upgrades, review the new bundle and replace the previously installed copy deliberately.
 
 ## OpenAI Codex
 
 Codex discovers repository and user skills in `.agents/skills/`. For a project-local install:
 
 ```sh
-cc_src=/absolute/path/to/crux-curiosity
+cc_src=/absolute/path/to/crux-curiosity-skill/skills/crux-curiosity
 cc_dest=.agents/skills/crux-curiosity
-test ! -e "$cc_dest" && mkdir -p "$cc_dest" &&
-  cp "$cc_src/SKILL.md" "$cc_src/LICENSE" "$cc_dest/" &&
-  cp -R "$cc_src/references" "$cc_dest/"
+test ! -e "$cc_dest" && mkdir -p "$(dirname "$cc_dest")" &&
+  cp -R "$cc_src" "$cc_dest"
 ```
 
 For a personal install use `~/.agents/skills/crux-curiosity` as the destination. Open a session in the target project and select `$crux-curiosity`, or use that name in the prompt. Project discovery in a particular session can depend on workspace and trust settings. Check for duplicate installed names if you see multiple entries. [Codex skill discovery](https://learn.chatgpt.com/docs/build-skills)
@@ -43,11 +42,10 @@ For delegation, use the session's native spawn, message/follow-up, wait, cancel 
 Use the native project skill directory:
 
 ```sh
-cc_src=/absolute/path/to/crux-curiosity
+cc_src=/absolute/path/to/crux-curiosity-skill/skills/crux-curiosity
 cc_dest=.claude/skills/crux-curiosity
-test ! -e "$cc_dest" && mkdir -p "$cc_dest" &&
-  cp "$cc_src/SKILL.md" "$cc_src/LICENSE" "$cc_dest/" &&
-  cp -R "$cc_src/references" "$cc_dest/"
+test ! -e "$cc_dest" && mkdir -p "$(dirname "$cc_dest")" &&
+  cp -R "$cc_src" "$cc_dest"
 ```
 
 For a personal install use `~/.claude/skills/crux-curiosity`. Invoke `/crux-curiosity` with the task and options. The core runs in the main session so it can coordinate optional research stages. [Claude Code skills](https://code.claude.com/docs/en/skills)

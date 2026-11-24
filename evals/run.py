@@ -12,6 +12,8 @@ import time
 
 EVALS = Path(__file__).resolve().parent
 DEFAULT_CASES = EVALS / "cases.json"
+# The installable skill folder; everything in it ships, nothing outside it does.
+DEFAULT_BUNDLE = EVALS.parent / "skills" / "crux-curiosity"
 CASES = json.loads(DEFAULT_CASES.read_text())
 VARIANTS = {
     "normal": "",
@@ -75,6 +77,7 @@ def prepare(workspace, args):
     if args.variant == "normal":
         return fixture_hashes
     skill_dir = installed_skill(workspace, args.backend)
+    # Copy only runtime files, so legacy repo-root bundles never leak evals or rubrics into the workspace.
     skill_dir.mkdir(parents=True)
     shutil.copy2(args.bundle / "SKILL.md", skill_dir)
     license_file = args.bundle / "LICENSE"
@@ -257,7 +260,7 @@ def main():
     parser.add_argument("variant", choices=VARIANTS)
     parser.add_argument("--timeout", type=int, default=150)
     parser.add_argument("--model")
-    parser.add_argument("--bundle", type=Path, default=EVALS.parent)
+    parser.add_argument("--bundle", type=Path, default=DEFAULT_BUNDLE)
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES, help="Trusted case JSON")
     parser.add_argument("--matched", action="store_true", help="Use the four-arm comparison protocol")
     parser.add_argument("--live-web", action="store_true", help="Enable Codex live retrieval for a read-only case")

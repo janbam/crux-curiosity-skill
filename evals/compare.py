@@ -6,7 +6,7 @@ import random
 import subprocess
 import sys
 
-from run import COMPARISON_ARMS, EVALS
+from run import COMPARISON_ARMS, DEFAULT_BUNDLE, EVALS
 
 
 def schedule(case_ids, seed):
@@ -37,7 +37,7 @@ def main():
     parser.add_argument("--model", required=True)
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--out", required=True, type=Path, help="A new output directory")
-    parser.add_argument("--bundle", type=Path, default=EVALS.parent)
+    parser.add_argument("--bundle", type=Path, default=DEFAULT_BUNDLE)
     parser.add_argument("--timeout", type=int, default=90)
     parser.add_argument("--max-budget-usd", type=float, help="Claude Code budget per arm")
     args = parser.parse_args()
