@@ -17,14 +17,15 @@ import recovery_replay
 import run
 
 ROOT = Path(__file__).resolve().parents[1]
+SKILL = run.DEFAULT_BUNDLE
 
 
 class BundleTests(unittest.TestCase):
     def test_local_markdown_links_resolve(self):
         pages = [
-            ROOT / "SKILL.md", ROOT / "README.md", ROOT / "CONTRIBUTING.md",
+            SKILL / "SKILL.md", ROOT / "README.md", ROOT / "CONTRIBUTING.md",
             ROOT / "evals" / "README.md", ROOT / "docs" / "installation.md",
-            ROOT / "docs" / "examples.md", *sorted((ROOT / "references").glob("*.md")),
+            ROOT / "docs" / "examples.md", *sorted((SKILL / "references").glob("*.md")),
         ]
         for page in pages:
             content = re.sub(r"^\x60{3}.*?^\x60{3}\s*$", "", page.read_text(), flags=re.MULTILINE | re.DOTALL)
@@ -41,7 +42,7 @@ class BundleTests(unittest.TestCase):
                         self.assertIn(unquote(location.fragment), anchors)
 
     def test_metadata_and_progressive_links(self):
-        skill = (ROOT / "SKILL.md").read_text()
+        skill = (SKILL / "SKILL.md").read_text()
         delimiter, metadata, body = skill.split("---\n", 2)
         self.assertEqual(delimiter, "")
         fields = dict(line.split(": ", 1) for line in metadata.strip().splitlines())
@@ -49,11 +50,13 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(fields["license"], "MIT")
         self.assertTrue((ROOT / "LICENSE").read_text().startswith("MIT License\n"))
         self.assertRegex(fields["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+        # The spec requires the skill folder to carry the skill's name.
+        self.assertEqual(SKILL.name, fields["name"])
         self.assertLessEqual(len(fields["name"]), 64)
         self.assertTrue(0 < len(fields["description"]) <= 1024)
         self.assertLessEqual(len(body.splitlines()), 100)
         referenced = {Path(path).name for path in re.findall(r"\]\((references/[^)#]+)", body)}
-        available = {path.name for path in (ROOT / "references").glob("*.md")}
+        available = {path.name for path in (SKILL / "references").glob("*.md")}
         self.assertEqual(referenced, available)
 
     def test_native_bundle_installation_and_control(self):
@@ -62,7 +65,7 @@ class BundleTests(unittest.TestCase):
                 with self.subTest(host=host, variant=variant), tempfile.TemporaryDirectory() as scratch:
                     workspace = Path(scratch)
                     args = argparse.Namespace(
-                        backend=host, case="algorithm", variant=variant, bundle=ROOT,
+                        backend=host, case="algorithm", variant=variant, bundle=SKILL,
                         cases=run.DEFAULT_CASES, case_spec=run.CASES["algorithm"],
                     )
                     initial = run.prepare(workspace, args)
@@ -71,17 +74,14 @@ class BundleTests(unittest.TestCase):
                     self.assertEqual(set(initial), {"membership.py", "bench.py"})
                     self.assertFalse((workspace / "cases.json").exists())
                     if variant != "normal":
-                        self.assertEqual((skill / "LICENSE").read_bytes(), (ROOT / "LICENSE").read_bytes())
-                        self.assertEqual(
-                            sorted(p.name for p in (skill / "references").iterdir()),
-                            sorted(p.name for p in (ROOT / "references").iterdir()),
-                        )
+                        # The installed bundle is exactly the shipped skill folder, license included.
+                        self.assertEqual(run.file_digests(skill), run.file_digests(SKILL))
+                        self.assertTrue((skill / "LICENSE").read_text().startswith("MIT License\n"))
                         before = run.bundle_fingerprint(skill)
                         (skill / "references" / "report.md").write_text("changed reference\n")
                         after = run.bundle_fingerprint(skill)
                         self.assertNotEqual(before["sha256"], after["sha256"])
                         self.assertEqual(before["files"]["SKILL.md"], after["files"]["SKILL.md"])
-                        self.assertIn("LICENSE", before["files"])
 
 
 class RunnerTests(unittest.TestCase):

@@ -33,7 +33,7 @@ If you want to be able to say “research this,” put a line like this in your 
 | **Extreme** | Give a difficult question more time for source review, competing explanations, and replication. |
 | **Autoresearch** | Improve something you can measure. Set a target and a trial limit, then let the agent test changes against a fixed evaluator. |
 
-You can give limits in plain English or use settings like `searches=12 experiments=2 minutes=10`. Use `experiments=0` for research and analysis only. [Mode settings and budgets](references/operations.md#configuration-and-accounting)
+You can give limits in plain English or use settings like `searches=12 experiments=2 minutes=10`. Use `experiments=0` for research and analysis only. [Mode settings and budgets](skills/crux-curiosity/references/operations.md#configuration-and-accounting)
 
 For example, here’s a bounded performance run.
 
@@ -48,7 +48,7 @@ batches. Save one batch for validation and include the raw timings.
 
 For a quick question, expect an answer and the evidence behind it. For a close call, the agent should tell you what would make the recommendation flip and the cheapest way to find out. Longer runs can save sources, hypotheses, trial results, and a checkpoint under `.research/<run-id>/`. Give the agent that path when you want to pick up where it left off.
 
-The skill uses the tools and permissions your agent already has. If a tool is missing, the report says what the agent could check and where the evidence stops. [Example sessions](docs/examples.md) · [Skill instructions](SKILL.md)
+The skill uses the tools and permissions your agent already has. If a tool is missing, the report says what the agent could check and where the evidence stops. [Example sessions](docs/examples.md) · [Skill instructions](skills/crux-curiosity/SKILL.md)
 
 ## What we’ve tested
 

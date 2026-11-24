@@ -9,7 +9,7 @@ python3 -m unittest discover -s evals -p 'test_*.py'
 git diff --check
 ```
 
-An Agent Skills validator can additionally check the bundle against the [specification](https://agentskills.io/specification). Run from a checkout directory named `crux-curiosity`.
+An Agent Skills validator can additionally check the bundle against the [specification](https://agentskills.io/specification). Point it at `skills/crux-curiosity/`.
 
 ## Live replays
 
@@ -21,7 +21,7 @@ python3 evals/run.py codex algorithm auto --timeout 240 --out eval-output/codex-
 python3 evals/run.py claude qualitative fallback --out eval-output/claude-fallback
 ```
 
-Each run starts a fresh temporary Git workspace. The `normal` condition installs no bundle. Other conditions copy only the skill and references into that CLI's native discovery path. The evaluator uses fixture-only inputs. Web search is disabled for the pilot, so these runs exercise local evidence paths. The Claude Code fallback omits Agent and shell tools. The Codex fallback sets `agents.enabled=false`. Run outputs include the exact prompt, provider events, stderr, summary and selected research artifacts. Inspect them before sharing.
+Each run starts a fresh temporary Git workspace. The `normal` condition installs no bundle. Other conditions copy the `skills/crux-curiosity/` folder into that CLI's native discovery path. The evaluator uses fixture-only inputs. Web search is disabled for the pilot, so these runs exercise local evidence paths. The Claude Code fallback omits Agent and shell tools. The Codex fallback sets `agents.enabled=false`. Run outputs include the exact prompt, provider events, stderr, summary and selected research artifacts. Inspect them before sharing.
 
 To check actual source use, run `python3 evals/run.py codex live-sources adaptive --live-web --out eval-output/live-sources`. The read-only case uses live web retrieval. Review the trace and check pivotal claims against the linked source sections.
 
