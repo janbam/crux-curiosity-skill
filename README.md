@@ -1,10 +1,10 @@
-# Weaponized Curiosity
+# Crux Curiosity
 
 ![A black linocut raven inspecting a red pebble.](assets/readme-banner.jpg)
 
-Use Weaponized Curiosity when you want your agent to research a question, compare options, or test an idea before you commit to it. Give it the question in your own words.
+Use Crux Curiosity when you want your agent to research a question, compare options, or test an idea before you commit to it. Give it the question in your own words.
 
-> Use Weaponized Curiosity to research whether we should keep our Postgres job queue or move to a dedicated broker. Use our current workload and tell me what would make switching worthwhile.
+> Use Crux Curiosity to research whether we should keep our Postgres job queue or move to a dedicated broker. Use our current workload and tell me what would make switching worthwhile.
 
 That’s a complete prompt. The skill starts with the evidence most likely to change the answer. It can dig deeper if it finds a consequential gap. Add a mode or budget when you have one in mind.
 
@@ -13,16 +13,16 @@ That’s a complete prompt. The skill starts with the evidence most likely to ch
 Run this from your project and choose Codex, Claude Code, or both.
 
 ```sh
-npx skills add AyushRajSinghParihar/weaponized-curiosity --skill weaponized-curiosity
+npx skills add janbam/crux-curiosity-skill --skill crux-curiosity
 ```
 
-You can ask for the skill by name or invoke it with `$weaponized-curiosity` in Codex and `/weaponized-curiosity` in Claude Code. The manual install only needs Git. [Installation guide](docs/installation.md)
+You can ask for the skill by name or invoke it with `$crux-curiosity` in Codex and `/crux-curiosity` in Claude Code. The manual install only needs Git. [Installation guide](docs/installation.md)
 
 ## Make it your go-to for research
 
 If you want to be able to say “research this,” put a line like this in your project instructions. Use `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code.
 
-> When I ask you to research something or compare options using evidence, use `weaponized-curiosity`.
+> When I ask you to research something or compare options using evidence, use `crux-curiosity`.
 
 ## When to pick a mode
 
@@ -38,7 +38,7 @@ You can give limits in plain English or use settings like `searches=12 experimen
 For example, here’s a bounded performance run.
 
 ```text
-Use Weaponized Curiosity in Autoresearch mode. Cut p95 on my local benchmark
+Use Crux Curiosity in Autoresearch mode. Cut p95 on my local benchmark
 by at least 10% and keep the outputs identical. Edit only src/parser.py in
 an isolated copy. Use at most three candidate changes and five measurement
 batches. Save one batch for validation and include the raw timings.

@@ -45,7 +45,7 @@ class BundleTests(unittest.TestCase):
         delimiter, metadata, body = skill.split("---\n", 2)
         self.assertEqual(delimiter, "")
         fields = dict(line.split(": ", 1) for line in metadata.strip().splitlines())
-        self.assertEqual(fields["name"], "weaponized-curiosity")
+        self.assertEqual(fields["name"], "crux-curiosity")
         self.assertEqual(fields["license"], "MIT")
         self.assertTrue((ROOT / "LICENSE").read_text().startswith("MIT License\n"))
         self.assertRegex(fields["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -66,7 +66,7 @@ class BundleTests(unittest.TestCase):
                         cases=run.DEFAULT_CASES, case_spec=run.CASES["algorithm"],
                     )
                     initial = run.prepare(workspace, args)
-                    skill = workspace / folder / "skills" / "weaponized-curiosity"
+                    skill = workspace / folder / "skills" / "crux-curiosity"
                     self.assertEqual((skill / "SKILL.md").exists(), variant != "normal")
                     self.assertEqual(set(initial), {"membership.py", "bench.py"})
                     self.assertFalse((workspace / "cases.json").exists())
@@ -142,7 +142,7 @@ class RunnerTests(unittest.TestCase):
                 {"type": "turn.completed", "usage": {"input_tokens": 41}},
             ],
             "claude": [
-                {"type": "system", "subtype": "init", "skills": ["weaponized-curiosity"], "model": "example"},
+                {"type": "system", "subtype": "init", "skills": ["crux-curiosity"], "model": "example"},
                 {"type": "assistant", "message": {"content": [
                     {"type": "tool_use", "name": "Task", "input": {"description": "Read independently"}},
                 ]}},

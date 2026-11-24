@@ -53,12 +53,12 @@ The smallest decision-changing test uses representative PDFs in both modes, matc
 
 ## Find the point at which you would switch
 
-> Use Weaponized Curiosity to research whether to replace our Postgres job queue. Our deployment can leave 1,200 jobs waiting, and all have to finish within 120 seconds. Workers can take 30 seconds to restart. We measured the queue draining at 18 jobs per second after restart.
+> Use Crux Curiosity to research whether to replace our Postgres job queue. Our deployment can leave 1,200 jobs waiting, and all have to finish within 120 seconds. Workers can take 30 seconds to restart. We measured the queue draining at 18 jobs per second after restart.
 
 In this illustrative example, keep the existing queue if the observed drain rate holds at peak. With 90 seconds left after restart, it needs to clear 1,200 jobs at about 13.34 jobs per second, net of new arrivals. At 18 jobs per second with no new arrivals, the modeled total is about 97 seconds. Reconsider if a peak-sized staging restart with realistic arrivals consistently falls below the required net rate. Diagnose whether dispatch or the workers themselves are the bottleneck before changing the queue.
 
 ## Reject a speed win on a memory limit
 
-> Use Weaponized Curiosity to speed up batch membership. Keep all outputs identical and stay within a 64 KiB temporary Python allocation budget. Try two changes on the search benchmark, then freeze the winner for a separate check.
+> Use Crux Curiosity to speed up batch membership. Keep all outputs identical and stay within a 64 KiB temporary Python allocation budget. Try two changes on the search benchmark, then freeze the winner for a separate check.
 
 A Codex run measured the baseline and two query-indexing approaches, then froze the faster one. A separate evaluation used fresh inputs after the run ended. Building a set of all values was about 41× faster than the baseline on the wide workload and allocated about 2.50 MiB. It failed the memory guard. The frozen candidate tracked only the missing probes and used about 10.2 KiB while passing exactness, speed, and the small-workload guard. [Measurements](evaluation/guarded-membership.json) · [Replay](../evals/README.md#guarded-optimization)

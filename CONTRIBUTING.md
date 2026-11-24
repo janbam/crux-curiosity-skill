@@ -11,4 +11,4 @@ Run the [local checks](evals/README.md#local-checks) before review. For harness 
 
 ## Cut a release
 
-Run the offline checks on the release commit and link the replay evidence in the release notes. Create an annotated version tag with `git tag -a vX.Y.Z -m "Weaponized Curiosity vX.Y.Z"`. Publish the tag and release notes when the release is ready. Tag pushes also run the offline checks. Keep tags fixed so past evaluations and installations remain reproducible.
+Run the offline checks on the release commit and link the replay evidence in the release notes. Create an annotated version tag with `git tag -a vX.Y.Z -m "Crux Curiosity vX.Y.Z"`. Publish the tag and release notes when the release is ready. Tag pushes also run the offline checks. Keep tags fixed so past evaluations and installations remain reproducible.

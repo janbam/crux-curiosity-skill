@@ -41,7 +41,7 @@ def tool_profile(args):
 
 def installed_skill(workspace, backend):
     discovery = ".agents" if backend == "codex" else ".claude"
-    return workspace / discovery / "skills" / "weaponized-curiosity"
+    return workspace / discovery / "skills" / "crux-curiosity"
 
 
 def file_digests(root):
@@ -90,10 +90,10 @@ def invocation(args):
         prefix = "$" if args.backend == "codex" else "/"
         settings = COMPARISON_ARMS if args.matched else VARIANTS
         if args.variant == "adaptive" and args.backend == "codex":
-            skill_request = "Use the weaponized-curiosity skill for this research."
+            skill_request = "Use the crux-curiosity skill for this research."
         else:
             options = f" {settings[args.variant]}" if settings[args.variant] else ""
-            skill_request = f"{prefix}weaponized-curiosity{options}"
+            skill_request = f"{prefix}crux-curiosity{options}"
         searches = 4 if args.live_web else 0
         request = (
             f"{skill_request} "
@@ -284,7 +284,7 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     prompt = invocation(args)
     (output / "request.txt").write_text(prompt)
-    with tempfile.TemporaryDirectory(prefix="weaponized-curiosity-") as scratch:
+    with tempfile.TemporaryDirectory(prefix="crux-curiosity-") as scratch:
         workspace = Path(scratch)
         fixture_hashes = prepare(workspace, args)
         skill_dir = installed_skill(workspace, args.backend)

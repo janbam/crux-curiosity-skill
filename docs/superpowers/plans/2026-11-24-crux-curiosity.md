@@ -1,4 +1,4 @@
-# Weaponized Curiosity Implementation Plan
+# Crux Curiosity Implementation Plan
 
 **Goal** — Build a portable skill that can route research, preserve provenance, test competing explanations, and run reversible optimization under an explicit budget.
 

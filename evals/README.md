@@ -9,7 +9,7 @@ python3 -m unittest discover -s evals -p 'test_*.py'
 git diff --check
 ```
 
-An Agent Skills validator can additionally check the bundle against the [specification](https://agentskills.io/specification). Run from a checkout directory named `weaponized-curiosity`.
+An Agent Skills validator can additionally check the bundle against the [specification](https://agentskills.io/specification). Run from a checkout directory named `crux-curiosity`.
 
 ## Live replays
 

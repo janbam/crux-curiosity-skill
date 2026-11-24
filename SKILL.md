@@ -1,10 +1,10 @@
 ---
-name: weaponized-curiosity
+name: crux-curiosity
 description: Investigate consequential or uncertain questions, compare competing explanations, and validate decisions with evidence. Use for deep technical research, architecture trade-offs, conflicting literature, hypothesis testing, reproducible benchmarks, or bounded autoresearch on a measurable objective.
 license: MIT
 ---
 
-# Weaponized Curiosity
+# Crux Curiosity
 
 Optimize for discoveries that change the decision. Use competing explanations, traceable evidence, and controlled tests to decide where more work will pay off.
 
