@@ -58,7 +58,7 @@ Codex and Claude Code were also tested on architecture decisions, conflicting so
 
 ## Dig in
 
-The research workflow was inspired by [Archie Sengupta’s tweet](https://x.com/archiexzzz/status/2124919619471474790).
+Crux Curiosity is a fork of [Weaponized Curiosity](https://github.com/AyushRajSinghParihar/weaponized-curiosity) by Ayush Raj Singh Parihar. The research workflow was inspired by [Archie Sengupta’s tweet](https://x.com/archiexzzz/status/2124919619471474790).
 
 Read why the workflow uses independent first passes and tests that can change the decision. [Research notes](docs/research.md) · [Source ledger](docs/evidence-ledger.md) · [Architecture](docs/architecture.md)
 
